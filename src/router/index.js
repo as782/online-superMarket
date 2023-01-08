@@ -29,5 +29,8 @@ VueRouter.prototype.replace = function (location, resole, reject) {
 export default new VueRouter({
     routes,
     //跳转路的滚轮位置调整
+    scrollBehavior(to, from, savedPosition) {
+        return { y: 0 }
+    }
 })
 

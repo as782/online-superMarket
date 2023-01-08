@@ -85,8 +85,10 @@ export default {
         clear() {
             this.keyword = "";
         },
+        //登出
         async Logout() {
             try {
+                //退出清除token和vuex的存储
                 await this.$store.dispatch('login/userLogout');
                 //退出后回到Home
                 this.$router.push({ name: 'home' });
