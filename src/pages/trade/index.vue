@@ -34,6 +34,7 @@
       <div class="detail">
         <h5>商品清单</h5>
         <ul class="list clearFix" v-for="(shop, index) in tradeInfo.detailArrayList" :key="shop.skuId">
+
           <li>
             <img :src="shop.imgUrl" alt="" style="width: 100px" />
           </li>
@@ -52,7 +53,9 @@
       </div>
       <div class="bbs">
         <h5>买家留言：</h5>
+
         <textarea placeholder="建议留言前先与商家沟通确认" class="remarks-cont" v-model="msg"></textarea>
+
       </div>
       <div class="line"></div>
       <div class="bill">
@@ -64,7 +67,9 @@
     <div class="money clearFix">
       <ul>
         <li>
+
           <b><i>{{ tradeInfo.totalNum }}</i>件商品，总商品金额</b>
+
           <span>¥{{ tradeInfo.totalAmount }}.00</span>
         </li>
         <li>
