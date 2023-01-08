@@ -56,11 +56,11 @@
       </div>
       <div class="money-box">
         <div class="chosed">已选择
-          <span>0</span>件商品
+          <span>{{ totalPrice.n }}</span>件商品
         </div>
         <div class="sumprice">
           <em>总价（不含运费） ：</em>
-          <i class="summoney">0</i>
+          <i class="summoney">{{ totalPrice.sum }}</i>
         </div>
         <div class="sumbtn">
           <a class="sum-btn" href="###" target="_blank">结算</a>
@@ -161,7 +161,18 @@ export default {
     },
     //计算中总价
     totalPrice() {
+      let sum = 0, n = 0;
 
+      this.cartInfoList.forEach(item => {
+
+        if (item.isChecked == 1) {
+          n++;
+          sum += item.skuPrice * item.skuNum;
+
+        }
+
+      });
+      return { sum, n };
     },
     //判断底部全选是否选中
     isAllSelect() {
