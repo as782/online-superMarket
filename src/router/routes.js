@@ -6,6 +6,7 @@ import Register from '@/pages/Register'
 import Detail from '@/pages/Detail'
 import AddCartSuccess from '@/pages/AddCartSuccess'
 import ShopCart from '@/pages/ShopCart'
+import Trade from '@/pages/trade'
 export default [
     { path: '/', redirect: '/home' },
     //主页路由
@@ -57,4 +58,11 @@ export default [
         component: Register,
         meta: { isShowFooter: false }
     },
+    //订单路由
+    {
+        name: 'trade',
+        path: '/trade',
+        component: Trade,
+        meta: { isShowFooter: false }
+    }
 ]

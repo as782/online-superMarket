@@ -10,6 +10,7 @@ import detail from './detail'
 import shopcart from './shopcart'
 import login from './login'
 import reg from './reg'
+import trade from './trade'
 
 export default new Vuex.Store({
     //配置模块
@@ -19,6 +20,6 @@ export default new Vuex.Store({
         detail,
         shopcart,
         login,
-        reg
+        reg, trade
     }
 })
