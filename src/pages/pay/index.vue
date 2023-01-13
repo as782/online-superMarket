@@ -1,45 +1,30 @@
 <template>
   <div>
     <div class="pay-main">
+
       <div class="pay-container">
         <div class="checkout-tit">
           <h4 class="tit-txt">
             <span class="success-icon"></span>
-            <span class="success-info"
-              >订单提交成功，请您及时付款，以便尽快为您发货~~</span
-            >
+            <span class="success-info">订单提交成功，请您及时付款，以便尽快为您发货~~</span>
           </h4>
           <div class="paymark">
-            <span class="fl"
-              >请您在提交订单<em class="orange time">4小时</em
-              >之内完成支付，超时订单会自动取消。订单号：<em>{{
-                payInfo.orderId
-              }}</em></span
-            >
-            <span class="fr"
-              ><em class="lead">应付金额：</em
-              ><em class="orange money">￥{{ payInfo.totalFee }}</em></span
-            >
+            <span class="fl">请您在提交订单<em class="orange time">4小时</em>之内完成支付，超时订单会自动取消。订单号：<em>{{
+              payInfo.orderId
+            }}</em></span>
+            <span class="fr"><em class="lead">应付金额：</em><em class="orange money">￥{{ payInfo.totalFee }}</em></span>
           </div>
         </div>
         <div class="checkout-info">
           <h4>重要说明：</h4>
           <ol>
             <li>
-              尚品汇商城支付平台目前支持<span class="zfb">支付宝</span
-              >支付方式。
+              尚品汇商城支付平台目前支持<span class="zfb">支付宝</span>支付方式。
             </li>
             <li>其它支付渠道正在调试中，敬请期待。</li>
             <li>为了保证您的购物支付流程顺利完成，请保存以下支付宝信息。</li>
           </ol>
-          <h4>
-            支付宝账户信息：（很重要，<span class="save">请保存！！！</span>）
-          </h4>
-          <ul>
-            <li>支付帐号：11111111</li>
-            <li>密码：111111</li>
-            <li>支付密码：111111</li>
-          </ul>
+
         </div>
         <div class="checkout-steps">
           <div class="step-tit">
@@ -106,14 +91,14 @@ export default {
       //支付相关信息:支付钱数、订单号、二维码地址
       payInfo: {},
       code: "",
-      timer:null
+      timer: null
     };
   },
   //组件挂载完毕，获取支付相关信息
   mounted() {
     //获取支付信息
     this.getPayInfo();
-    console.log(this,'pay');
+    console.log(this, 'pay');
   },
   methods: {
     //立即支付按钮
@@ -129,32 +114,33 @@ export default {
         showClose: false, //右上角的关闭按钮不显示
         confirmButtonText: "支付成功", //确定按钮的文本
         showCancelButton: true, //显示取消按钮
-        cancelButtonText: "支付遇见问题", //取消按钮的文本
+        cancelButtonText: "取消支付", //取消按钮的文本
         closeOnClickModal: true, //点击遮罩层关闭messagebox
-        beforeClose:(action, instance, done)=>{ //在消息盒子关闭之前会触发
-           //action参数:可以区分用户点击的是取消【cancel】、确定【confirm】
-           //instance参数:当前消息框组件VC
-           //done参数：是一个函数,函数可以关闭消息盒子
-           if(action=='confirm' && this.code==200){
-              //清除定时器
-              clearInterval(this.timer);
-              //关闭盒子
-              done();
-              //路由跳转
-              this.$router.push('/paysuccess');
-           }else if(action=='cancel' && this.code!=200){
-               //清除定时器
-              clearInterval(this.timer);
-              //关闭盒子
-              done();
-              this.$message.error('支付遇见问题请联系超管豪哥');
-           }
+        beforeClose: (action, instance, done) => {
+          //在消息盒子关闭之前会触发
+          //action参数:可以区分用户点击的是取消【cancel】、确定【confirm】
+          //instance参数:当前消息框组件VC
+          //done参数：是一个函数,函数可以关闭消息盒子
+          if (action == 'confirm') {
+            //清除定时器
+            clearInterval(this.timer);
+            //关闭盒子
+            done();
+            //路由跳转
+            this.$router.push('/paysuccess');
+          } else if (action == 'cancel' && this.code != 200) {
+            //清除定时器
+            clearInterval(this.timer);
+            //关闭盒子
+            done();
+            this.$message.error('支付遇见问题请联系0000');
+          }
         }
       });
       //查询支付结果,开启定时器每隔一段时间询问支付结果
-     this.timer  = setInterval(async () => {
+      this.timer = setInterval(async () => {
         //发请求获取支付结果
-        let result = await this.$http.reqPayResult(this.payInfo.orderId);
+        let result = await this.$API.reqPayResult(this.payInfo.orderId);
         //返回数据当中：code=200代表支付成功  code=205未支付
         if (result.code == 200) {
           //支付成功了
@@ -163,7 +149,7 @@ export default {
           //清除定时器
           clearInterval(this.timer);
           //关闭messagebox
-          this.$msgbox.close(); 
+          this.$msgbox.close();
           //在路由跳转
           this.$router.push('/paySuccess');
         } else {
@@ -174,7 +160,7 @@ export default {
     },
     //获取支付信息
     async getPayInfo() {
-      let result = await this.$http.reqPayInfo(this.$route.query.orderId);
+      let result = await this.$API.reqPayInfo(this.$route.query.orderId);
       if (result.code == 200) {
         this.payInfo = result.data;
       }

@@ -5,7 +5,7 @@
     <div class="content">
       <!-- 收件人信息地方 -->
       <h5 class="receive">收件人信息</h5>
-      <div class="address clearFix" v-for="(user, index) in address" :key="user.id">
+      <div class="address clearFix" v-for="user in address" :key="user.id">
         <span class="username" :class="{ selected: user.isDefault == '1' }">{{
           user.consignee
         }}</span>
@@ -33,7 +33,7 @@
       <!-- 商品清单：购物车里面的数据 -->
       <div class="detail">
         <h5>商品清单</h5>
-        <ul class="list clearFix" v-for="(shop, index) in tradeInfo.detailArrayList" :key="shop.skuId">
+        <ul class="list clearFix" v-for="shop in tradeInfo.detailArrayList" :key="shop.skuId">
 
           <li>
             <img :src="shop.imgUrl" alt="" style="width: 100px" />

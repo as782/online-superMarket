@@ -7,6 +7,11 @@ import Detail from '@/pages/Detail'
 import AddCartSuccess from '@/pages/AddCartSuccess'
 import ShopCart from '@/pages/ShopCart'
 import Trade from '@/pages/trade'
+import Center from '@/pages/center'
+// import Communication from '@/pages/Communication'
+import Pay from '@/pages/pay'
+import PaySuccess from '@/pages/paySuccess'
+
 export default [
     { path: '/', redirect: '/home' },
     //主页路由
@@ -64,5 +69,40 @@ export default [
         path: '/trade',
         component: Trade,
         meta: { isShowFooter: false }
-    }
+    },
+    //支付页面路由
+    {
+        name: 'pay',
+        path: '/pay',
+        component: Pay,
+        meta: { isShowFooter: true }
+    },
+    //支付成功
+    {
+        name: 'paysuccess',
+        path: '/paysuccess',
+        component: PaySuccess,
+        meta: { isShowFooter: true }
+
+    },
+    //center
+    {
+        name: 'center'
+        ,
+        path: '/center'
+        ,
+        component: Center
+        ,
+        meta: { isShowFooter: true }
+    },
+    //Communication
+    // {
+    //     name: 'communication'
+    //     ,
+    //     path: '/communication'
+    //     ,
+    //     component: Communication
+    //     ,
+    //     meta: { isShowFooter: true }
+    // }
 ]
