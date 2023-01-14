@@ -97,7 +97,7 @@ export default [
         ,
         meta: { isShowFooter: true },
         children: [
-            // { path: '/', redirect: 'myorder' },
+            { path: '/', redirect: 'myorder' },
             { name: 'myorder', path: 'myorder', component: myOrder, meta: { isShowFooter: true }, },
             { name: 'teamorder', path: 'teamorder', component: teamOrder, meta: { isShowFooter: true }, },
         ]
