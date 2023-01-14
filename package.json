@@ -17,6 +17,7 @@
     "qrcode": "^1.5.1",
     "swiper": "^6.8.4",
     "vue": "^2.6.14",
+    "vue-lazyload": "^3.0.0-rc.2",
     "vue-router": "^3.6.5",
     "vuex": "^3.6.2"
   },
