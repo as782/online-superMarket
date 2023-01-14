@@ -21,40 +21,40 @@
       <!--展示订单的地方-->
       <div class="orders">
         <!--遍历我们的订单数据-->
-        <table class="order-item" v-for="(order,index) in  list" :key="order.id">
+        <table class="order-item" v-for="order in  list" :key="order.id">
           <thead>
             <tr>
               <th colspan="5">
-                <span class="ordertitle"
-                  >{{order.createTime}}　订单编号：{{order.outTradeNo}}
-                  <span class="pull-right delete"
-                    ><img src="../images/delete.png" /></span
-                ></span>
+                <span class="ordertitle">
+                  {{ order.createTime }}　订单编号：{{ order.outTradeNo }}
+                  <span class="pull-right delete"><img src="../images/delete.png" /></span>
+                </span>
               </th>
             </tr>
           </thead>
           <tbody>
-             <!-- 每一笔订单展示购买商品的地方 -->
-            <tr v-for="(cart,index) in order.orderDetailList" :key="index">
+            <!-- 每一笔订单展示购买商品的地方 -->
+            <tr v-for="(cart, index) in order.orderDetailList" :key="index">
               <td width="60%">
                 <div class="typographic">
-                  <img :src="cart.imgUrl" style="width:100px;height:100px"/>
-                  <a class="block-text">{{cart.skuName}}</a>
-                  <span>x{{cart.skuNum}}</span>
+                  <img :src="cart.imgUrl" style="width:100px;height:100px" />
+                  <a class="block-text">{{ cart.skuName }}</a>
+                  <span>x{{ cart.skuNum }}</span>
                   <a href="#" class="service">售后申请</a>
                 </div>
               </td>
-              <td :rowspan="order.orderDetailList.length" v-show="index==0" width="8%" class="center">{{order.consignee}}</td>
-              <td :rowspan="order.orderDetailList.length" v-show="index==0" width="13%" class="center">
+              <td :rowspan="order.orderDetailList.length" v-show="index == 0" width="8%" class="center">
+                {{ order.consignee }}</td>
+              <td :rowspan="order.orderDetailList.length" v-show="index == 0" width="13%" class="center">
                 <ul class="unstyled">
-                  <li>总金额¥{{order.totalAmount}}.00</li>
+                  <li>总金额¥{{ order.totalAmount }}.00</li>
                   <li>在线支付</li>
                 </ul>
               </td>
-              <td :rowspan="order.orderDetailList.length" v-show="index==0" width="8%" class="center">
-                <a href="#" class="btn">{{order.orderStatusName}}</a>
+              <td :rowspan="order.orderDetailList.length" v-show="index == 0" width="8%" class="center">
+                <a href="#" class="btn">{{ order.orderStatusName }}</a>
               </td>
-              <td :rowspan="order.orderDetailList.length"  v-show="index==0" width="13%" class="center">
+              <td :rowspan="order.orderDetailList.length" v-show="index == 0" width="13%" class="center">
                 <ul class="unstyled">
                   <li>
                     <a href="mycomment.html" target="_blank">评价|晒单</a>
@@ -66,21 +66,16 @@
         </table>
       </div>
       <div class="choose-order">
-             <!-- 全局组件分页器：
+        <!-- 全局组件分页器：
                 total:分页器一共要展示多少条数据
                 pageSize:一页展示几条数据
                 pageNo:当前页码
-                pagerCount:连续页码数
+                continues:连续页码数
                 currentPage:自定义事件父组件获取分页器当前页码
 
               -->
-             <Pagination
-              :total="total"
-              :pageSize="limit"
-              :pageNo="page"
-              :pagerCount="9"
-              @currentPage="currentPage"
-            ></Pagination>
+        <Paginations :total="total" :pageSize="limit" :PageNo="page" :continues="7" @goPagenNo="currentPage">
+        </Paginations>
       </div>
     </div>
     <!--猜你喜欢-->
@@ -139,18 +134,20 @@
 </template>
 
 <script>
+import Paginations from '@/components/Pagiantions';
 export default {
-  name: "",
+  name: "myOrder",
+  components: { Paginations },
   data() {
     return {
       //收集的是当前页码数
       page: 1,
       //收集的是一页几条数据
-      limit: 3,
+      limit: 10,
       //存储我的订单数据
-      list:[],
+      list: [],
       //分页器一共展示多少条数据
-      total:0
+      total: 0
     };
   },
   mounted() {
@@ -162,21 +159,22 @@ export default {
     async getData() {
       //获取我的订单的数据:page|limit
       const { page, limit } = this;
-      let result = await this.$http.reqMyOrderList(page, limit);
+      let result = await this.$API.reqMyOrderList(page, limit);
       if (result.code == 200) {
-          this.list = result.data.records;
-          this.total = result.data.total;
+        this.list = result.data.records;
+        this.total = result.data.total;
       }
     },
     //获取用户点击当前页码的自定义事件的回调
-    currentPage(page){
-        //修改参数
-        this.page = page;
-        this.getData();
+    currentPage(page) {
+      //修改参数
+      this.page = page;
+      this.getData();
     }
   },
 };
 </script>
 
 <style scoped>
+
 </style>

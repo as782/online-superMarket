@@ -7,7 +7,7 @@
                 </li>
                 <li v-if="startAndEndPage[0] > 1" @click="goPage(1)"><a>1</a></li>
                 <li class="dotted" v-show="startAndEndPage[0] > 1"><span>...</span></li>
-                <li :class="{ active: PageNo == i }" v-for="i, index in startAndEndPage" :key="index"
+                <li :class="{ active: PageNo == i }" v-for="i, index in   startAndEndPage" :key="index"
                     @click="goPage(i)">
                     <a>{{ i }}</a>
                 </li>
@@ -27,7 +27,7 @@
             
 <script>
 export default {
-    name: "Pagiantion",
+    name: "Pagiantions",
     //pageNo当前页，total总数，pageSize每页多少个,continues连续的页码数。
     props: ['PageNo', 'total', 'pageSize', 'continues'],
     computed: {
@@ -38,7 +38,7 @@ export default {
         //计算连续分页的开始页和结束页
         startAndEndPage() {
             let start = 0, end = 0;
-
+            // console.log(this.totalPages, this.continues, this.PageNo);
             // 当连续的页码数大于页码总数时
             if (this.continues > this.totalPages) {
                 start = 1;
@@ -57,7 +57,11 @@ export default {
                     end = this.totalPages;
                 }
             }
-            return Array.from(new Array(end + 1).keys()).slice(start)
+            console.log(end, start);
+            let ad = Array.from(new Array(end + 1).keys()).slice(start);
+            // console.log(ad);
+            return ad
+            // return [start, end]
         }
     },
     methods: {

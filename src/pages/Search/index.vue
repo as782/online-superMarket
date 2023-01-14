@@ -76,7 +76,7 @@
                   </div>
                   <div class="attr">
                     <a target="_blank" href="item.html" title="促销信息，下单即赠送三个月CIBN视频会员卡！【小米电视新品4A 58 火爆预约中】">{{
-                        goods.title
+                      goods.title
                     }}</a>
                   </div>
                   <div class="commit">
@@ -92,9 +92,9 @@
             </ul>
           </div>
           <!-- 分页器 -->
-          <Pagiantion @goPagenNo="goPagenNo" :PageNo="reqdata.pageNo" :total="searchList.total"
+          <Pagiantions @goPagenNo="goPagenNo" :PageNo="reqdata.pageNo" :total="searchList.total"
             :pageSize="reqdata.pageSize" :continues="5">
-          </Pagiantion>
+          </Pagiantions>
         </div>
       </div>
     </div>

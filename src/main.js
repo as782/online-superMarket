@@ -6,7 +6,7 @@ Vue.config.productionTip = false
 //引入TypeNav，轮播图，和分页器。
 import TypeNav from '@/components/TypeNav'
 import Carousel from '@/components/Carousel'
-import Pagiantion from '@/components/Pagiantion'
+import Pagiantions from '@/components/Pagiantions'
 
 //ElementUI 
 // import 'element-ui/lib/theme-chalk/index.css';
@@ -19,7 +19,7 @@ Vue.component(Select.name, Select);
 //注册全局组件TepeNav,Carousel,Pagination
 Vue.component(TypeNav.name, TypeNav)
 Vue.component(Carousel.name, Carousel)
-Vue.component(Pagiantion.name, Pagiantion)
+Vue.component(Pagiantions.name, Pagiantions)
 
 //Vux组件状态管理
 import store from '@/store'

@@ -7,7 +7,9 @@ import Detail from '@/pages/Detail'
 import AddCartSuccess from '@/pages/AddCartSuccess'
 import ShopCart from '@/pages/ShopCart'
 import Trade from '@/pages/trade'
-import Center from '@/pages/center'
+import Center from '@/pages/Center'
+import myOrder from '@/pages/Center/myOrder'
+import teamOrder from '@/pages/Center/teamOrder'
 // import Communication from '@/pages/Communication'
 import Pay from '@/pages/pay'
 import PaySuccess from '@/pages/paySuccess'
@@ -85,7 +87,7 @@ export default [
         meta: { isShowFooter: true }
 
     },
-    //center
+    //
     {
         name: 'center'
         ,
@@ -93,7 +95,12 @@ export default [
         ,
         component: Center
         ,
-        meta: { isShowFooter: true }
+        meta: { isShowFooter: true },
+        children: [
+            // { path: '/', redirect: 'myorder' },
+            { name: 'myorder', path: 'myorder', component: myOrder, meta: { isShowFooter: true }, },
+            { name: 'teamorder', path: 'teamorder', component: teamOrder, meta: { isShowFooter: true }, },
+        ]
     },
     //Communication
     // {

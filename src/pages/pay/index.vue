@@ -121,7 +121,7 @@ export default {
           //action参数:可以区分用户点击的是取消【cancel】、确定【confirm】
           //instance参数:当前消息框组件VC
           //done参数：是一个函数,函数可以关闭消息盒子
-          if (action == 'confirm') {
+          if (action == 'confirm') {// 先去掉&& this.code==200
             //清除定时器
             clearInterval(this.timer);
             //关闭盒子
