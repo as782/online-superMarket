@@ -12,7 +12,6 @@ import Pagiantions from '@/components/Pagiantions'
 // import 'element-ui/lib/theme-chalk/index.css';
 import { Button, Select } from 'element-ui';
 import { MessageBox } from 'element-ui';
-
 Vue.component(Button.name, Button);
 Vue.component(Select.name, Select);
 
@@ -23,12 +22,20 @@ Vue.component(Pagiantions.name, Pagiantions)
 
 //Vux组件状态管理
 import store from '@/store'
-
 // 接口全部引入
 import * as API from '@/api'
-
 //执行mock 模拟后端数据
 import '@/mock/mockServer'
+//图片懒加载插件
+import VueLazyload from 'vue-lazyload'
+const loadimage = require('./assets/loading.gif')
+const errorimage = require('./assets/error.png')
+Vue.use(VueLazyload, {
+  preLoad: 1.3,
+  error: errorimage,
+  loading: loadimage,
+  attempt: 1
+})
 
 //全局引入Swiper插件的样式
 import 'swiper/swiper-bundle.min.css'

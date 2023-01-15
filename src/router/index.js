@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 import routes from './routes'
 import store from '@/store'
+import { removeToken } from '@/utils/token'
 // // 重写push和replace方法解决编程导航的报错问题
 let originPush = VueRouter.prototype.push
 let replace = VueRouter.prototype.replace
@@ -57,14 +58,31 @@ router.beforeEach(async (to, from, next) => {
                     next();
                 } catch (error) {
                     //token 失效，退出清除旧的token
-                    store.dispatch('login/userLogout');
+                    // store.dispatch('login/userLogout');
+                    // removeToken();
 
                 }
             }
         }
     } else {
         //未登录
-        next();
+        const topath = to.path;
+        const paths = [
+            '/center/myorder',
+            '/center/teamorder',
+            '/shopcart',
+            '/paysuccess',
+            '/pay',
+            '/center',
+        ]
+        if (paths.some(e => { return e === topath })) {
+
+            next(`/login?redict=${topath}`);
+            alert('请先登录！')
+        } else {
+            next();
+        }
+
     }
 });
 

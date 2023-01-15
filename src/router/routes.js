@@ -77,14 +77,32 @@ export default [
         name: 'pay',
         path: '/pay',
         component: Pay,
-        meta: { isShowFooter: true }
+        meta: { isShowFooter: true },
+        //独享守卫
+        beforeEnter: (to, from, next) => {
+            if (from.path == '/trade') {
+                next();
+            } else {
+                alert('先去买点东西吧！');
+                next(from.path);
+            }
+        }
     },
     //支付成功
     {
         name: 'paysuccess',
         path: '/paysuccess',
         component: PaySuccess,
-        meta: { isShowFooter: true }
+        meta: { isShowFooter: true },
+        //独享守卫
+        beforeEnter: (to, from, next) => {
+            if (from.path == '/pay') {
+                next();
+            } else {
+                alert('先去买点东西吧！')
+                next(from.path);
+            }
+        }
 
     },
     //
@@ -97,7 +115,7 @@ export default [
         ,
         meta: { isShowFooter: true },
         children: [
-            { path: '/', redirect: 'myorder' },
+            // { path: '/', redirect: 'myorder' },
             { name: 'myorder', path: 'myorder', component: myOrder, meta: { isShowFooter: true }, },
             { name: 'teamorder', path: 'teamorder', component: teamOrder, meta: { isShowFooter: true }, },
         ]

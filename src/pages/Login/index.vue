@@ -82,7 +82,16 @@ export default {
         if (phone && password) {
           //等待成功，并且跳转路由home,显示 账户详细
           await this.$store.dispatch('login/reqLoginSystem', { phone, password });
-          this.$router.push({ name: 'home' });
+          // console.log(this.$route.query);
+          //跳转到需要登录可见其他页面，登录后跳转到当前页。
+          if (this.$route.query) {
+            this.$router.push(
+              this.$route.query.redict
+            )
+          } else {
+            this.$router.push({ name: 'home' });
+          }
+
         } else {
           alert('请先输入账号密码！')
         }
